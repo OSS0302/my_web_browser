@@ -11,6 +11,8 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  late WebViewController _webViewController;
+
   @override
   void initState() {
     super.initState();
@@ -28,28 +30,31 @@ class _MainScreenState extends State<MainScreen> {
             icon: const Icon(Icons.add),
           ),
           PopupMenuButton<String>(
-            onSelected:(value){
-              print(value);
+            onSelected: (value) {
+                _webViewController.loadUrl(value);
             },
             itemBuilder: (context) => [
               const PopupMenuItem<String>(
-                value: 'https://www.google.com/',
+                value: 'https://www.google.com',
                 child: Text('구글'),
               ),
               const PopupMenuItem<String>(
-                value: 'https://www.naver.com/',
+                value: 'https://www.naver.com',
                 child: Text('네이버'),
               ),
               const PopupMenuItem<String>(
-                value: 'https://www.kakao.com/',
+                value: 'https://www.kakao.com',
                 child: Text('카카오'),
               ),
             ],
           )
         ],
       ),
-      body: const WebView(
-        initialUrl: 'https://flutter.dev',
+      body: WebView(
+        initialUrl:'https://flutter.dev',
+        onWebViewCreated: (controller) {
+          _webViewController = controller;
+        },
       ),
     );
   }
