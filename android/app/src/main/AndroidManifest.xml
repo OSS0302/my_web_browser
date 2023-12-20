@@ -1,4 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--     인터넷 권한 주기  -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:label="my_web_browser"
         android:name="${applicationName}"
